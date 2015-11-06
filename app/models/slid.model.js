@@ -1,6 +1,6 @@
 "use strict"
 
-var isJson = require("../../modules/is-json");
+var utils = require("../../utils/utils");
 
 function Slid (json) {
 
@@ -22,7 +22,7 @@ function Slid (json) {
 	// PUBLIC PROPERTIES -- ANYONE MAY READ/WRITE
 	// ************************************************************************
 	// isJson?
-  if(isJson(json)) {
+  if(utils.isJson(json)) {
     if(json.type && json.id && json.title && json.fileName) {
       this.type = json.type;
     	this.id = json.id;
