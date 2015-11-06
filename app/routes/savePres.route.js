@@ -20,7 +20,7 @@ router.route("/")
       var json = JSON.parse(content);
       if(typeof json.id !== null) {
         var file = json.id + ".pres.json";
-        fs.writeFile(relativePresentationDirectory + "/" + content, json, function (err) {
+        fs.writeFile(relativePresentationDirectory + "/" + file, content, function (err) {
           if (err) throw err;
           response.send("Presentation saved.")
         });
