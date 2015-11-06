@@ -1,11 +1,11 @@
 "use strict"
 
-var utils = require("../../utils/utils");
+var utils = require("../utils/utils.js");
 var fs = require("fs");
+var CONFIG = JSON.parse(process.env.CONFIG);
 var relativePresentationDirectory = __dirname + CONFIG.presentationDirectory;
 var relativecontentDirectory = __dirname + CONFIG.contentDirectory;
 var path = require("path");
-var CONFIG = JSON.parse(process.env.CONFIG);
 
 function Slid (json) {
 
@@ -65,13 +65,25 @@ Slid.create = function(slid, callback){
 }
 
 Slid.read = function(id, callback){
+	var jsonToReturn = {};
 	fs.readdir(relativecontentDirectory, function(err, files) {
       if (err) throw err;
       files.forEach(function(file, i) {
       	console.log(path.extname(file));
-      	// if (path.extname(file) == )
+      	 if (path.extname(file) == ".json") {
+      	 	fs.readFile(relativecontentDirectory + "/" + file,'utf-8', function(err, json) {
+          if (err) throw err;
+          jsonToReturn = JSON.parse(json);
+          if (jsonToReturn.id == id)
+          {
+          	var slid=new Slid(jsonToReturn);
+          	console.log(slid);
+          }
+      	 	
+      	 });
       }
-	}
+      });
+	});
 }
 
 Slid.update = function(slid, callback){

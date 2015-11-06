@@ -24,6 +24,11 @@ app.use("/save-pres", savePresRoute);
 app.use("/watcher", watcherRoute);
 app.use("/admin", adminRoute);
 
+//test seni slide.read function
+
+var slideModel = require("./app/models/slid.model.js");
+var slide = slideModel.read("37ba76b1-5c5d-47ef-8350-f4ea9407276d");
+//console.log(slide);
 server.listen(CONFIG.port, function() {
   console.log("Amazing server is running at port " + CONFIG.port);
 });
