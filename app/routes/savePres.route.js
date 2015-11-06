@@ -1,7 +1,6 @@
 "use strict";
 
 var express = require("express");
-var jsonlint = require("jsonlint");
 var fs = require("fs");
 var router = express.Router();
 var CONFIG = JSON.parse(process.env.CONFIG);
@@ -21,7 +20,7 @@ router.route("/")
       var json = JSON.parse(content);
       if(typeof json.id !== null) {
         var file = json.id + ".pres.json";
-        fs.writeFile(relativePresentationDirectory + "/" + file, json, function (err) {
+        fs.writeFile(relativePresentationDirectory + "/" + content, json, function (err) {
           if (err) throw err;
           response.send("Presentation saved.")
         });
