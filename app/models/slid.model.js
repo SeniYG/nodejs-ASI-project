@@ -1,9 +1,12 @@
 
+"use strict"
+
+var utils = require("../../utils/utils");
 var fs = require("fs");
 var CONFIG = JSON.parse(process.env.CONFIG);
 var relativePresentationDirectory = __dirname + CONFIG.presentationDirectory;
 
-function Slide (type, id, title, fileName) {
+function Slid (json) {
 
 	// ************************************************************************
 	// PRIVATE VARIABLES AND FUNCTIONS
@@ -22,12 +25,20 @@ function Slide (type, id, title, fileName) {
 	// ************************************************************************
 	// PUBLIC PROPERTIES -- ANYONE MAY READ/WRITE
 	// ************************************************************************
-	this.type = type;
-	this.id = id;
-  	this.title = title;
-  	this.fileName = fileName;
-}
 
+	// isJson?
+  if(utils.isJson(json)) {
+    if(json.type && json.id && json.title && json.fileName) {
+      this.type = json.type;
+    	this.id = json.id;
+      this.title = json.title;
+      this.fileName = json.fileName;
+    }
+  } else {
+
+  }
+
+}
 
 // ************************************************************************
 // PUBLIC METHODS -- ANYONE MAY READ/WRITE
@@ -51,7 +62,7 @@ Slid.create = function(slid, callback){
 }
 
 Slid.read = function(id, callback){
-	
+
 }
 
 Slid.update = function(slid, callback){
@@ -61,4 +72,6 @@ Slid.update = function(slid, callback){
 Slid.delete = function(id, callback){
 
 }
+
+module.exports = Slid;
 

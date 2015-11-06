@@ -1,4 +1,4 @@
-'use strict';
+"use strict";
 
 var fs = require("fs");
 var path = require("path");
@@ -8,10 +8,10 @@ module.exports = this;
 
 this.generateUUID = function() {
 	var d = new Date().getTime();
-	var uuid = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+	var uuid = "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(/[xy]/g, function(c) {
 		var r = (d + Math.random()*16)%16 | 0;
 		d = Math.floor(d/16);
-		return (c=='x' ? r : (r&0x3|0x8)).toString(16);
+		return (c=="x" ? r : (r&0x3|0x8)).toString(16);
 	});
 	return uuid;
 };
@@ -47,7 +47,7 @@ this.getDataFilePath = function(fileName) {
 }
 
 this.getNewFileName = function(id, originalFileName) {
-	return id + '.' + originalFileName.split('.').pop();
+	return id + "." + originalFileName.split(".").pop();
 }
 
 this.getFileType = function(fileType) {
@@ -56,4 +56,13 @@ this.getFileType = function(fileType) {
 	} else if (fileType.search("video")) {
 		return "VIDEO_CUSTOM";
 	}
+};
+
+this.isJson = function(str) {
+  try {
+      JSON.parse(str);
+  } catch (e) {
+      return false;
+  }
+  return true;
 };
