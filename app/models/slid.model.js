@@ -1,4 +1,8 @@
-function Slide (type, id, title, fileName) {
+"use strict"
+
+var isJson = require("../../modules/is-json");
+
+function Slid (json) {
 
 	// ************************************************************************
 	// PRIVATE VARIABLES AND FUNCTIONS
@@ -17,24 +21,37 @@ function Slide (type, id, title, fileName) {
 	// ************************************************************************
 	// PUBLIC PROPERTIES -- ANYONE MAY READ/WRITE
 	// ************************************************************************
-	this.type = type;
-	this.id = id;
-  this.title = title;
-  this.fileName = fileName;
-}
+	// isJson?
+  if(isJson(json)) {
+    if(json.type && json.id && json.title && json.fileName) {
+      this.type = json.type;
+    	this.id = json.id;
+      this.title = json.title;
+      this.fileName = json.fileName;
+    }
+  } else {
 
+  }
+
+}
 
 // ************************************************************************
 // PUBLIC METHODS -- ANYONE MAY READ/WRITE
 // ************************************************************************
-Slid.prototype.create = function(slid, callback){
+Slid.create = function(slid, callback){
 
 }
 
-Slid.prototype.read = function(id, callback){
+Slid.read = function(id, callback){
 
 }
 
-Slid.prototype.update = function(slid, callback){
+Slid.update = function(slid, callback){
 
 }
+
+Slid.delete = function(id, callback){
+
+}
+
+module.exports = Slid;
