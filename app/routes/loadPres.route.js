@@ -1,10 +1,11 @@
 "use strict";
 
 var express = require("express");
-var router = express.Router();
 var fs = require('fs');
+var router = express.Router();
 var CONFIG = JSON.parse(process.env.CONFIG);
 var relativePresentationDirectory = __dirname + CONFIG.presentationDirectory;
+
 module.exports = router;
 
 router.route("/")
