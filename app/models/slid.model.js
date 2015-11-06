@@ -2,8 +2,10 @@
 
 var utils = require("../../utils/utils");
 var fs = require("fs");
-var CONFIG = JSON.parse(process.env.CONFIG);
 var relativePresentationDirectory = __dirname + CONFIG.presentationDirectory;
+var relativecontentDirectory = __dirname + CONFIG.contentDirectory;
+var path = require("path");
+var CONFIG = JSON.parse(process.env.CONFIG);
 
 function Slid (json) {
 
@@ -37,7 +39,9 @@ function Slid (json) {
   } else {
     // handle error when data is not json
   }
+
 }
+
 
 // ************************************************************************
 // PUBLIC METHODS -- ANYONE MAY READ/WRITE
@@ -61,7 +65,7 @@ Slid.create = function(slid, callback){
 }
 
 Slid.read = function(id, callback){
-
+	
 }
 
 Slid.update = function(slid, callback){
