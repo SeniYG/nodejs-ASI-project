@@ -1,6 +1,10 @@
 "use strict";
 
 var express = require("express");
+<<<<<<< HEAD
+=======
+//var jsonlint = require("jsonlint");
+>>>>>>> savePres function almost working
 var fs = require("fs");
 var router = express.Router();
 var CONFIG = JSON.parse(process.env.CONFIG);
