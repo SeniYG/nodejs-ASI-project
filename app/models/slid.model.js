@@ -65,7 +65,13 @@ Slid.create = function(slid, callback){
 }
 
 Slid.read = function(id, callback){
-	
+	fs.readdir(relativecontentDirectory, function(err, files) {
+      if (err) throw err;
+      files.forEach(function(file, i) {
+      	console.log(path.extname(file));
+      	// if (path.extname(file) == )
+      }
+	}
 }
 
 Slid.update = function(slid, callback){
