@@ -10,8 +10,6 @@ module.exports = router;
 router.route("/")
   .get(function(request, response) {
     var jsonToReturn = {};
-    console.info("load pres route");
-
     fs.readdir(relativePresentationDirectory, function(err, files) {
       if (err) throw err;
       var c = 0;

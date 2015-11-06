@@ -12,6 +12,6 @@
   "license": "ISC",
   "dependencies": {
     "express": "^4.13.3",
-    "jsonfile": "^2.2.3"
+    "jsonlint": "^1.6.2"
   }
 }
