@@ -24,9 +24,6 @@ app.use("/save-pres", savePresRoute);
 app.use("/watcher", watcherRoute);
 app.use("/admin", adminRoute);
 
-// app.use("/admin", express.static(path.join(__dirname, "public/admin")));
-// app.use("/watch", express.static(path.join(__dirname, "public/watch")));
-
 server.listen(CONFIG.port, function() {
   console.log("Amazing server is running at port " + CONFIG.port);
 });
