@@ -1,4 +1,4 @@
-function Slide (type, id, title, fileName) {
+function Slide (jsonObj) {
 
 	// ************************************************************************
 	// PRIVATE VARIABLES AND FUNCTIONS
@@ -27,14 +27,18 @@ function Slide (type, id, title, fileName) {
 // ************************************************************************
 // PUBLIC METHODS -- ANYONE MAY READ/WRITE
 // ************************************************************************
-Slid.prototype.create = function(slid, callback){
+Slid.create = function(slid, callback){
 
 }
 
-Slid.prototype.read = function(id, callback){
+Slid.read = function(id, callback){
+	
+}
+
+Slid.update = function(slid, callback){
 
 }
 
-Slid.prototype.update = function(slid, callback){
+Slid.delete = function(id, callback){
 
 }
