@@ -28,5 +28,5 @@ app.use("/admin", adminRoute);
 // app.use("/watch", express.static(path.join(__dirname, "public/watch")));
 
 server.listen(CONFIG.port, function() {
-  console.log("Server is running at port " + CONFIG.port);
+  console.log("Amazing server is running at port " + CONFIG.port);
 });
