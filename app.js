@@ -24,6 +24,11 @@ app.use("/save-pres", savePresRoute);
 app.use("/watcher", watcherRoute);
 app.use("/admin", adminRoute);
 
+var slidModel = require("./app/models/slid.model");
+slidModel.create(null, function(){
+	console.log("everythings good");
+})
+
 server.listen(CONFIG.port, function() {
   console.log("Amazing server is running at port " + CONFIG.port);
 });
