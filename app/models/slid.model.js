@@ -1,4 +1,3 @@
-
 "use strict"
 
 var utils = require("../../utils/utils");
@@ -26,18 +25,18 @@ function Slid (json) {
 	// PUBLIC PROPERTIES -- ANYONE MAY READ/WRITE
 	// ************************************************************************
 
-	// isJson?
   if(utils.isJson(json)) {
     if(json.type && json.id && json.title && json.fileName) {
       this.type = json.type;
     	this.id = json.id;
       this.title = json.title;
       this.fileName = json.fileName;
+    } else {
+      // handle error when data is missing
     }
   } else {
-
+    // handle error when data is not json
   }
-
 }
 
 // ************************************************************************
@@ -74,4 +73,3 @@ Slid.delete = function(id, callback){
 }
 
 module.exports = Slid;
-
