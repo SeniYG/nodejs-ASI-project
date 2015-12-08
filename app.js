@@ -9,7 +9,6 @@ var  path  =  require("path");
 var CONFIG = require("./config.json");
 process.env.CONFIG = JSON.stringify(CONFIG);
 
-
 // Init server
 var app = express();
 var  server  =  http.createServer(app);
@@ -27,3 +26,10 @@ app.use(savePresRoute);
 server.listen(CONFIG.port, function() {
   console.log("Amazing server is running at port " + CONFIG.port);
 });
+
+
+var Slide = require("./app/models/slide.model");
+var jsonSlide = {"type":"toto","id":undefined};
+jsonSlide = JSON.stringify(jsonSlide);
+var slide = new Slide(jsonSlide);
+console.log(slide);
