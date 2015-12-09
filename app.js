@@ -4,6 +4,7 @@
 var express = require("express");
 var  http  =  require("http");
 var  path  =  require("path");
+var io = require('socket.io');
 
 // Init configuration
 var CONFIG = require("./config.json");
@@ -39,3 +40,5 @@ app.use('/connect', connectRouter);
 server.listen(CONFIG.port, function() {
   console.log("Amazing server is running at port " + CONFIG.port);
 });
+
+io = io.listen(server);
