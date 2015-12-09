@@ -44,10 +44,16 @@ process.env.CONFIG = JSON.stringify(CONFIG);
 var app = express();
 var server = http.createServer(app);
 
+// // Routes client angular
+// app.use("/", express.static(__dirname + "/public-test/admin"));
+// app.use("/bower_components",  express.static(__dirname + "/public-test/bower_components"));
+// app.use("/js",  express.static(__dirname + "/public-test/admin/js"));
+// app.use("/images",  express.static(__dirname + "/public-test/images"));
+
 // Routes client angular
-app.use("/", express.static(__dirname + "/public-test/admin"));
+app.use("/", express.static(__dirname + "/public-test/watcher-test"));
 app.use("/bower_components",  express.static(__dirname + "/public-test/bower_components"));
-app.use("/js",  express.static(__dirname + "/public-test/admin/js"));
+app.use("/js",  express.static(__dirname + "/public-test/watcher-test/js"));
 app.use("/images",  express.static(__dirname + "/public-test/images"));
 
 // Routes server
@@ -70,5 +76,17 @@ server.listen(CONFIG.port, function() {
 	console.log("Amazing server is running at port " + CONFIG.port);
 });
 
+/**************** SOCKET ********************/
 
 io = io.listen(server);
+
+io.sockets.on('connection', function(socket){
+    socket.emit('connection', {'connection': 'hello client'});
+		socket.on('slidEvent', function(data){
+		    //notify all clients
+				if(data.CMD != 'START')
+					io.sockets.emit('slidEvent', {'CMD': data.CMD});
+				else
+					io.sockets.emit('slidEvent', {'CMD': data.CMD, 'PRES_ID': data.PRES_ID});
+		});
+});
