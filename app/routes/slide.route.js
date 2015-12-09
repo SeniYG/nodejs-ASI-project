@@ -6,8 +6,8 @@ var  slideController  =  require("./../controllers/slide.controller.js");
 module.exports  =  router;
 
 router.route('/slides')
-  .get(slideController.getSlides);
-  // .post(slide.token,slide.create);
+  .get(slideController.getSlides)
+  .post(slideController.postSlides);
 router.route('/slides/:slideId')
   .get(slideController.getSlide);
   // .get(slide.read)

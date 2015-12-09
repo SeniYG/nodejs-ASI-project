@@ -23,6 +23,47 @@ exports.getPresentations = function(req, res) {
   });
 };
 
+// Create endpoint /api/presId for GET
+exports.getPresentationId = function(req, res) {
+      var jsonToReturn = {};
+
+      //get request param: presentation id
+      var pres_id = req.presId;
+
+      //get presentation from its file and send it to the client
+      fs.readFile(relativePresentationDirectory + "/" + pres_id + ".pres.json", function(err, data) {
+        if (err){
+          response.status(400);
+      		response.send('server has not found such presentation');
+          console.log('error sent');
+        } else{
+          response.send(data);
+        }
+      });
+};
+
+// Create endpoint /api/save-pres for GET
+exports.savePresentation = function(req, res) {
+  var content = "";
+
+  request.on("data", function(chunk) {
+    content = content + chunk;
+  });
+  request.on("end", function() {
+    var json = JSON.parse(content);
+    if(typeof json.id !== null) {
+      var file = json.id + ".pres.json";
+      fs.writeFile(relativePresentationDirectory + "/" + file, content, function (err) {
+        if (err) throw err;
+        response.send("Presentation saved.")
+      });
+    } else {
+      response.send("Your json does not have a correct id.");
+    };
+  });
+};
+
+
 // Create endpoint /api/pres for POST
 // exports.postPresentation = function(request, response) {
 //   var content = "";

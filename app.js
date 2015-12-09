@@ -4,6 +4,7 @@
 var express = require("express");
 var  http  =  require("http");
 var  path  =  require("path");
+var io = require('socket.io');
 
 // Init configuration
 var CONFIG = require("./config.json");
@@ -14,9 +15,9 @@ var app = express();
 var  server  =  http.createServer(app);
 
 // Routes client angular
-app.use("/", express.static(__dirname + "/public-test/login"));
+app.use("/", express.static(__dirname + "/public-test/admin"));
 app.use("/bower_components",  express.static(__dirname + "/public-test/bower_components"));
-app.use("/js",  express.static(__dirname + "/public-test/login/js"));
+app.use("/js",  express.static(__dirname + "/public-test/admin/js"));
 
 // Routes server
 var  slideRouter  =  require("./app/routes/slide.route.js");
@@ -31,3 +32,5 @@ app.use('/connect', connectRouter);
 server.listen(CONFIG.port, function() {
   console.log("Amazing server is running at port " + CONFIG.port);
 });
+
+io = io.listen(server);
