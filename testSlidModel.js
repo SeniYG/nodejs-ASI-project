@@ -4,7 +4,7 @@ var CONFIG = require("./config.json");
 process.env.CONFIG = JSON.stringify(CONFIG);
 
 var utils = require("./app/utils/utils.js");
-var SlidModel = require("./app/models/slid.model.js");
+var SlidModel = require("./app/models/slide.model.js");
 
 var slid = new SlidModel();
 

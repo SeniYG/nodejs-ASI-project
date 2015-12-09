@@ -14,22 +14,20 @@ var app = express();
 var  server  =  http.createServer(app);
 
 // Routes client angular
-app.use("/admin", express. static (path.join(__dirname, "public/admin")));
-app.use("/watch", express. static (path.join(__dirname, "public/watch")));
+app.use("/", express.static(__dirname + "/public-test/login"));
+app.use("/bower_components",  express.static(__dirname + "/public-test/bower_components"));
+app.use("/js",  express.static(__dirname + "/public-test/login/js"));
 
 // Routes server
-var  loadPresRoute  =  require("./app/routes/loadPres.route.js");
-app.use(loadPresRoute);
-var  savePresRoute  =  require("./app/routes/savePres.route.js");
-app.use(savePresRoute);
+var  slideRouter  =  require("./app/routes/slide.route.js");
+app.use('/api', slideRouter);
+
+var presRouter = require("./app/routes/pres.route.js");
+app.use('/api', presRouter);
+
+var connectRouter = require("./app/routes/connect.route.js");
+app.use('/connect', connectRouter);
 
 server.listen(CONFIG.port, function() {
   console.log("Amazing server is running at port " + CONFIG.port);
 });
-
-
-var Slide = require("./app/models/slide.model");
-var jsonSlide = {"type":"toto","id":undefined};
-jsonSlide = JSON.stringify(jsonSlide);
-var slide = new Slide(jsonSlide);
-console.log(slide);
