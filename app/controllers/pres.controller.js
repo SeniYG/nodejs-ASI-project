@@ -63,7 +63,6 @@ exports.savePresentation = function(req, res) {
   });
 };
 
-
 // Create endpoint /api/pres for POST
 // exports.postPresentation = function(request, response) {
 //   var content = "";

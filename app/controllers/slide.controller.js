@@ -3,14 +3,17 @@ var SlideModel = require('../models/slide.model.js');
 
 // Create endpoint /api/slides for POST
 exports.postSlides = function(req, res) {
-  //console.log("getSlide(" + req.slideId + ")");
-  console.log(req);
-  // SlideModel.create(req.slideId, function(err) {
-  //   if(err) {
-  //     console.log(err);
-  //     res.status(404).json(err);
+  // var user = new User({
+  //   username: req.body.username,
+  //   password: req.body.password
+  // });
+  //
+  // user.save(function(err) {
+  //   if (err) {
+  //     console.error(err.stack);
+  //     res.send(err.message);
   //   } else {
-  //     res.json(slide);
+  //     res.json({ message: 'New beer drinker added to the locker room!' });
   //   }
   // });
 };
