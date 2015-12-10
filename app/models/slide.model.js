@@ -65,7 +65,7 @@ Slide.create = function(slide, callback){
   }
   // Store slide.data into slide.fileName
   var promiseDataStored = new Promise(function (resolve, reject) {
-    fs.writeFile(relativeContentDirectory + "/" + slide.fileName, slide.getData(), function (err, res) {
+    fs.writeFile(relativeContentDirectory + "/" + slide.fileName, slide.getData(), 'binary', function (err, res) {
       if (err) {
         console.log("Error in CREATION during STORE DATA.");
         reject(err);
