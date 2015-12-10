@@ -23,12 +23,14 @@ var imageMap={};
 fs.readdir('./public-test/images', function(err, files){
 	if (!err){
 		for(var i = 0; i<files.length; i++){
-			var img = {};
-			img.id = i;
-			img.type = path.extname(files[i]);
-			img.title = path.basename(files[i], img.type);
-			img.src = '../images/' + files[i];
-			imageMap[i] = img;
+			if(path.extname(files[i]) == '.jpeg' || path.extname(files[i]) == '.jpg'){
+				var img = {};
+				img.id = i;
+				img.type = path.extname(files[i]);
+				img.title = path.basename(files[i], img.type);
+				img.src = '../images/' + files[i];
+				imageMap[i] = img;
+			}
 		}
 	}
 	else

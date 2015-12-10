@@ -26,12 +26,13 @@ app.use("/bower_components",  express.static(__dirname + "/public-test/bower_com
 app.use("/images",  express.static(__dirname + "/public-test/images"));
 
 // Routes server
+// slides
 var  slideRouter  =  require("./app/routes/slide.route.js");
 app.use('/api', slideRouter);
-
+// presentations
 var presRouter = require("./app/routes/pres.route.js");
 app.use('/api', presRouter);
-
+// connection
 var connectRouter = require("./app/routes/connect.route.js");
 app.use('/connect', connectRouter);
 
@@ -39,4 +40,59 @@ server.listen(CONFIG.port, function() {
   console.log("Amazing server is running at port " + CONFIG.port);
 });
 
+// Socket configuration
 io = io.listen(server);
+io.sockets.on('connection', function(socket){
+    socket.emit('connection', {'connection': 'hello client'});
+		socket.on('slidEvent', function(data){
+		    //notify all clients
+				if(data.CMD != 'START')
+					io.sockets.emit('slidEvent', {'CMD': data.CMD});
+				else
+					io.sockets.emit('slidEvent', {'CMD': data.CMD, 'PRES_ID': data.PRES_ID});
+		});
+});
+
+
+
+
+
+
+
+//fake user map creation ****************************************
+//key is the login, value is a table with respectivelly pwd and role
+var fs = require('fs');
+var userMap={};
+userMap['loulou']=['loulou', 'admin'];
+userMap['guig']=['guig', 'watcher'];
+userMap['seni']=['seni', 'watcher'];
+//***************************************************************
+
+//image map creation ****************************************
+//this map will contain all the images in the target file
+//the map will be later sent to client
+var imageMap={};
+fs.readdir('./public-test/images', function(err, files){
+	if (!err){
+		for(var i = 0; i<files.length; i++){
+			if(path.extname(files[i]) == '.jpeg' || path.extname(files[i]) == '.jpg'){
+				var img = {};
+				img.id = i;
+				img.type = path.extname(files[i]);
+				img.title = path.basename(files[i], img.type);
+				img.src = '../images/' + files[i];
+				imageMap[i] = img;
+			}
+		}
+	}
+	else
+		throw err;
+});
+//***************************************************************
+
+
+//send image map to the client
+app.get("/resources_list", function(request, response) {
+	var jsonToSend = JSON.stringify(imageMap);
+	response.send(jsonToSend);
+});
