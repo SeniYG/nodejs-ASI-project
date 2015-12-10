@@ -25,9 +25,6 @@ response) {
       slide.type = request.file.mimetype;
       slide.title = request.file.originalname;
       slide.fileName = fileName + path.extname(request.file.originalname);
-      console.log(request.file);
-      console.log(path.extname(request.file.originalname));
-      console.log(slide);
       slide.setData(data);
       SlideModel.create(slide);
 		});
