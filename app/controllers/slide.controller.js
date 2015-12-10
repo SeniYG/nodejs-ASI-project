@@ -9,6 +9,7 @@ var relativeContentDirectory = __dirname + CONFIG.contentDirectory;
 
 // Create endpoint /api/slides for POST
 exports.postSlides = function(req, res) {
+  
 };
 
 // Create endpoint /api/slides for GET

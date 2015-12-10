@@ -44,16 +44,15 @@ process.env.CONFIG = JSON.stringify(CONFIG);
 var app = express();
 var server = http.createServer(app);
 
-// // Routes client angular
-// app.use("/", express.static(__dirname + "/public-test/admin"));
-// app.use("/bower_components",  express.static(__dirname + "/public-test/bower_components"));
-// app.use("/js",  express.static(__dirname + "/public-test/admin/js"));
-// app.use("/images",  express.static(__dirname + "/public-test/images"));
-
 // Routes client angular
-app.use("/", express.static(__dirname + "/public-test/watcher-test"));
+// login module
+app.use("/", express.static(__dirname + "/public-test/login"));
+// admin module
+app.use("/admin", express.static(__dirname + "/public-test/admin"));
+// watcher module
+app.use("/watch", express.static(__dirname + "/public-test/watcher-test"));
+// bower_components
 app.use("/bower_components",  express.static(__dirname + "/public-test/bower_components"));
-app.use("/js",  express.static(__dirname + "/public-test/watcher-test/js"));
 app.use("/images",  express.static(__dirname + "/public-test/images"));
 
 // Routes server
