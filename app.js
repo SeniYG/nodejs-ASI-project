@@ -17,15 +17,13 @@ var  server  =  http.createServer(app);
 // Routes client angular
 // login module
 app.use("/", express.static(__dirname + "/public-test/login"));
-app.use("/js",  express.static(__dirname + "/public-test/login/js"));
 // admin module
 app.use("/admin", express.static(__dirname + "/public-test/admin"));
-app.use("/admin/js",  express.static(__dirname + "/public-test/admin/js"));
 // watcher module
 app.use("/watch", express.static(__dirname + "/public-test/watcher"));
-app.use("/watch/js",  express.static(__dirname + "/public-test/watcher/js"));
 // bower_components
 app.use("/bower_components",  express.static(__dirname + "/public-test/bower_components"));
+app.use("/images",  express.static(__dirname + "/public-test/images"));
 
 // Routes server
 var  slideRouter  =  require("./app/routes/slide.route.js");
