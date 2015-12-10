@@ -18,7 +18,7 @@ module.exports  =  router;
 router.post("/slides", multerMiddleware.single("file"),  function (request,
 response) {
     var fileName = request.file.filename;
-		fs.readFile(request.file.path, 'utf-8', function (err, data){
+		fs.readFile(request.file.path, 'binary', function (err, data){
 			if (err) throw err;
       var slide = new SlideModel();
       slide.id = fileName;
@@ -29,7 +29,7 @@ response) {
       console.log(path.extname(request.file.originalname));
       console.log(slide);
       slide.setData(data);
-      console.log(data);
+      //console.log(data);
       SlideModel.create(slide);
 		});
 });
