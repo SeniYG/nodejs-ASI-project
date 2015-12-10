@@ -1,17 +1,36 @@
 "usestrict";
 
-//var  multer  =  require("multer");
+var  multer  =  require("multer");
 var  express  =  require("express");
 var  router  =  express.Router();
+var utils = require("./../utils/utils");
+var fs = require("fs");
+var path = require("path");
+var SlideModel = require('../models/slide.model.js');
 var  slideController  =  require("./../controllers/slide.controller.js");
+var CONFIG = JSON.parse(process.env.CONFIG);
+var relativeContentDirectory = __dirname + CONFIG.contentDirectory;
+
 module.exports  =  router;
 
-// var  multerMiddleware  =  multer({ "dest" :  "/tmp/" });
+ var  multerMiddleware  =  multer({ "dest" :  "/tmp/" });
 
-// router.post("/slids", multerMiddleware.single("file"),  function (request, 
-// response) {
-// 		req.
-// });
+router.post("/slides", multerMiddleware.single("file"),  function (request, 
+response) {
+    var fileName = request.file.filename;
+    var datafilePath = path.join(relativeContentDirectory, fileName);
+		fs.readFile(request.file.path, 'utf-8', function (err, data){
+			if (err) throw err;
+      var slide = new SlideModel();
+      slide.id = fileName;
+      slide.type = request.file.mimetype;
+      slide.title = request.file.originalname;
+      slide.fileName = fileName + ".jpg";
+      console.log(slide);
+      slide.setData(data);
+      SlideModel.create(slide);
+		});
+});
 
 router.route('/slides')
   .get(slideController.getSlides);

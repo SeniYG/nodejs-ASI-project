@@ -78,7 +78,12 @@ Slide.create = function(slide, callback){
 
   // Create json file to store metadata
   var promiseMetadataStored = new Promise(function (resolve, reject) {
-    fs.writeFile(relativeContentDirectory + "/" + slide.id + ".meta.json", JSON.stringify(slide), function(err, res){
+    var slideToUpdate = new Slide();
+     slideToUpdate.title = slide.title;
+     slideToUpdate.type = slide.type;
+     slideToUpdate.fileName = slide.fileName;
+     slideToUpdate.id = slide.id;
+    fs.writeFile(relativeContentDirectory + "/" + slide.id + ".meta.json", JSON.stringify(slideToUpdate), function(err, res){
       if (err) {
         console.log("Error in CREATION during STORE METADATA.");
         reject(err);
