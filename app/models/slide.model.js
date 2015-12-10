@@ -136,7 +136,7 @@ Slide.read = function(id, callback){
     if(callback) {
       callback(null, slide[0]);
     } else {
-      return slide;
+      return slide[0];
     }
   })
   .catch(function (err) {

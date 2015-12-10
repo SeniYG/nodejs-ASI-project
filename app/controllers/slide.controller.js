@@ -2,7 +2,7 @@
 var SlideModel = require('../models/slide.model.js');
 var fs = require("fs");
 var path = require("path");
-var Promise = require("promise");
+var utils = require("./../utils/utils");
 var CONFIG = JSON.parse(process.env.CONFIG);
 var relativePresentationDirectory = __dirname + CONFIG.presentationDirectory;
 var relativeContentDirectory = __dirname + CONFIG.contentDirectory;
@@ -38,18 +38,32 @@ exports.getSlides = function(req, res) {
 };
 
 exports.getSlide = function(req, res) {
-  console.log("getSlide(" + req.slideId + ")");
-  if(req.params.json) {
-    SlideModel.read(req.slideId, function(err, slide) {
-      if(err) {
-        console.log(err);
-        res.status(404).json(err);
-      } else {
-        res.json(slide);
-      }
+  var jsonToReturn = {};
+  var metafilePath = utils.getMetaFilePath(req.slideId);
+  var slide;
+  SlideModel.read(req.slideId, function (err, json){
+    if (err) console.log(err);
+    console.log("*************************");
+    console.log(typeof json);
+    console.log(json.fileName);
+    console.log("*************************");
+    
+   // var datafilePath = utils.getDataFilePath(json.fileName);
+   var datafilePath = path.join(relativeContentDirectory, json.fileName);
+   console.log(datafilePath);
+   console.log(relativeContentDirectory + "/" + json.fileName);
+   console.log(req.query.json);
+    fs.readFile(datafilePath,'utf-8', function (error, data){ 
+      if (error) {throw err;}
+      else if(req.query.json) {
+          json.data = data;
+          //var slide = SlideModel(json);
+          console.log("json = true");
+          res.json(json);
+          }
+        else {
+          res.json(data);
+        }
+      });
     });
-  } else {
-    //TODO by seni
-    res.json({"warning":"not implmented yet."})
-  }
 };

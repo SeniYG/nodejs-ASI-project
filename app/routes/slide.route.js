@@ -1,9 +1,17 @@
 "usestrict";
 
+//var  multer  =  require("multer");
 var  express  =  require("express");
 var  router  =  express.Router();
 var  slideController  =  require("./../controllers/slide.controller.js");
 module.exports  =  router;
+
+// var  multerMiddleware  =  multer({ "dest" :  "/tmp/" });
+
+// router.post("/slids", multerMiddleware.single("file"),  function (request, 
+// response) {
+// 		req.
+// });
 
 router.route('/slides')
   .get(slideController.getSlides);
