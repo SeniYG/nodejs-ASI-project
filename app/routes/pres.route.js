@@ -7,9 +7,9 @@ module.exports  =  router;
 
 router.route('/pres')
   .get(presController.getPresentations);
-router.route('/presId/:presId')
+router.route('/pres/:presId')
   .get(presController.getPresentationId);
-router.route('/save-pres')
+router.route('/pres')
   .post(presController.savePresentation);
   // .post(presController.postPresentation);
 // router.route('/pres/:presId')
