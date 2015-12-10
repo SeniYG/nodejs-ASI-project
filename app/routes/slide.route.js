@@ -29,7 +29,6 @@ response) {
       console.log(path.extname(request.file.originalname));
       console.log(slide);
       slide.setData(data);
-      console.log(data);
       SlideModel.create(slide);
 		});
 });
