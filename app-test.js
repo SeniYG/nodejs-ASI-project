@@ -55,7 +55,7 @@ app.use("/admin", express.static(__dirname + "/public-test/admin"));
 app.use("/watch", express.static(__dirname + "/public-test/watcher-test"));
 // bower_components
 app.use("/bower_components",  express.static(__dirname + "/public-test/bower_components"));
-app.use("/images",  express.static(__dirname + "/public-test/images"));
+app.use("/uploads",  express.static(__dirname + "/uploads"));
 
 // Routes server
 var  slideRouter  =  require("./app/routes/slide.route.js");

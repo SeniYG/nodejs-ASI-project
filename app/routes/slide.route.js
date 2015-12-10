@@ -15,7 +15,7 @@ module.exports  =  router;
 
  var  multerMiddleware  =  multer({ "dest" :  "/tmp/" });
 
-router.post("/slides", multerMiddleware.single("file"),  function (request, 
+router.post("/slides", multerMiddleware.single("file"),  function (request,
 response) {
     var fileName = request.file.filename;
 		fs.readFile(request.file.path, 'utf-8', function (err, data){
