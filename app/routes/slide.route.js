@@ -18,16 +18,18 @@ module.exports  =  router;
 router.post("/slides", multerMiddleware.single("file"),  function (request, 
 response) {
     var fileName = request.file.filename;
-    var datafilePath = path.join(relativeContentDirectory, fileName);
 		fs.readFile(request.file.path, 'utf-8', function (err, data){
 			if (err) throw err;
       var slide = new SlideModel();
       slide.id = fileName;
       slide.type = request.file.mimetype;
       slide.title = request.file.originalname;
-      slide.fileName = fileName + ".jpg";
+      slide.fileName = fileName + path.extname(request.file.originalname);
+      console.log(request.file);
+      console.log(path.extname(request.file.originalname));
       console.log(slide);
       slide.setData(data);
+      console.log(data);
       SlideModel.create(slide);
 		});
 });
