@@ -11,11 +11,6 @@ router.route('/pres/:presId')
   .get(presController.getPresentationId);
 router.route('/pres')
   .post(presController.savePresentation);
-  // .post(presController.postPresentation);
-// router.route('/pres/:presId')
-  // .get(presController.getPresentations);
-  // .put(slide.update)
-  // .delete(slide.delete);
 router.param('presId',  function (req, res, next, id) {
     req.presId = id;
     next();

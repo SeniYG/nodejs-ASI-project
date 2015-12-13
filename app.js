@@ -23,7 +23,7 @@ app.use("/admin", express.static(__dirname + "/public-test/admin"));
 app.use("/watch", express.static(__dirname + "/public-test/watcher"));
 // bower_components
 app.use("/bower_components",  express.static(__dirname + "/public-test/bower_components"));
-app.use("/images",  express.static(__dirname + "/public-test/images"));
+app.use("/uploads",  express.static(__dirname + "/uploads"));
 
 // Routes server
 // slides
@@ -51,48 +51,4 @@ io.sockets.on('connection', function(socket){
 				else
 					io.sockets.emit('slidEvent', {'CMD': data.CMD, 'PRES_ID': data.PRES_ID});
 		});
-});
-
-
-
-
-
-
-
-//fake user map creation ****************************************
-//key is the login, value is a table with respectivelly pwd and role
-var fs = require('fs');
-var userMap={};
-userMap['loulou']=['loulou', 'admin'];
-userMap['guig']=['guig', 'watcher'];
-userMap['seni']=['seni', 'watcher'];
-//***************************************************************
-
-//image map creation ****************************************
-//this map will contain all the images in the target file
-//the map will be later sent to client
-var imageMap={};
-fs.readdir('./public-test/images', function(err, files){
-	if (!err){
-		for(var i = 0; i<files.length; i++){
-			if(path.extname(files[i]) == '.jpeg' || path.extname(files[i]) == '.jpg'){
-				var img = {};
-				img.id = i;
-				img.type = path.extname(files[i]);
-				img.title = path.basename(files[i], img.type);
-				img.src = '../images/' + files[i];
-				imageMap[i] = img;
-			}
-		}
-	}
-	else
-		throw err;
-});
-//***************************************************************
-
-
-//send image map to the client
-app.get("/resources_list", function(request, response) {
-	var jsonToSend = JSON.stringify(imageMap);
-	response.send(jsonToSend);
 });
